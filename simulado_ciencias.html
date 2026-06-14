@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado – Ciências 5º ano (Unidades 4 e 5)</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Trebuchet MS','Comic Sans MS',sans-serif}
+  body{background:linear-gradient(135deg,#ede7f6,#e1f5fe);color:#333;padding:14px;line-height:1.5}
+  .wrap{max-width:760px;margin:0 auto}
+  header{background:linear-gradient(135deg,#5e35b1,#3949ab);color:#fff;border-radius:20px;padding:20px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+  header h1{font-size:1.5rem}
+  .placar{position:sticky;top:6px;z-index:10;background:#fff;border-radius:14px;padding:10px 14px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1);display:flex;align-items:center;gap:12px;font-weight:bold;color:#5e35b1}
+  .barra{flex:1;height:14px;background:#eee;border-radius:10px;overflow:hidden}
+  .barra>div{height:100%;width:0;background:linear-gradient(90deg,#7e57c2,#3949ab);transition:width .4s}
+  .q{background:#fff;border-radius:16px;padding:18px;margin:12px 0;box-shadow:0 3px 10px rgba(0,0,0,.07);display:none}
+  .q.show{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .q .qn{color:#7e57c2;font-weight:bold;font-size:.85rem}
+  .q p.enun{font-weight:bold;margin:8px 0 12px;font-size:1.02rem}
+  .opc{display:block;width:100%;text-align:left;background:#faf7ff;border:2px solid #e0d6f5;border-radius:10px;padding:11px 14px;margin:7px 0;cursor:pointer;font-size:.96rem;transition:.12s;font-family:inherit}
+  .opc:hover{border-color:#7e57c2;background:#f3ecff}
+  .opc.sel{border-color:#5e35b1;background:#ede7f6;font-weight:bold}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin:14px 0}
+  .nav button{flex:1;border:none;border-radius:30px;padding:14px;font-size:1rem;font-weight:bold;cursor:pointer;font-family:inherit}
+  .voltar{background:#e0e0e0;color:#555}
+  .avancar{background:#5e35b1;color:#fff}
+  .avancar:disabled{background:#b39ddb;cursor:not-allowed}
+  .resultado{background:#fff;border-radius:20px;padding:30px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.12);display:none}
+  .resultado.show{display:block;animation:fade .4s}
+  .resultado .big{font-size:3rem}
+  .resultado h2{color:#5e35b1;margin:8px 0}
+  .nota{font-size:2.4rem;font-weight:bold;color:#3949ab;margin:8px 0}
+  .btn{background:#5e35b1;color:#fff;border:none;border-radius:30px;padding:14px 24px;font-size:1rem;cursor:pointer;font-family:inherit;margin:8px 6px}
+  .btn.alt{background:#26a69a}
+  footer{text-align:center;color:#999;font-size:.8rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📝 Simulado de Ciências</h1>
+    <p>Unidades 4 e 5 • 25 questões • Capriche!</p>
+  </header>
+
+  <div id="prova">
+    <div class="placar">
+      <span>Questão <span id="atual">1</span>/25</span>
+      <div class="barra"><div id="barra"></div></div>
+      <span id="respCount">0 ✓</span>
+    </div>
+    <div id="qbox"></div>
+    <div class="nav">
+      <button class="voltar" onclick="voltar()">⬅️ Voltar</button>
+      <button class="avancar" id="btnAv" onclick="avancar()">Avançar ➡️</button>
+    </div>
+  </div>
+
+  <div class="resultado" id="resultado">
+    <div class="big" id="emoji">🎯</div>
+    <h2>Simulado concluído!</h2>
+    <div class="nota" id="nota"></div>
+    <p id="rTexto"></p>
+    <button class="btn" onclick="location.reload()">🔄 Refazer simulado</button>
+    <button class="btn alt" onclick="location.href='gabarito_ciencias.html'">📖 Ver gabarito comentado</button>
+  </div>
+
+  <footer>Quando terminar, confira o gabarito comentado para entender cada questão. 💜</footer>
+</div>
+
+<script>
+/* questões inéditas baseadas no conteúdo do livro (Unidades 4 e 5). c = índice da resposta correta (0-3) */
+const Q = [
+  {e:'Marina pegou um copo de vidro e uma garrafa de plástico. Sobre a ORIGEM desses materiais, é correto afirmar que:',o:['Os dois são naturais','Os dois são artificiais','O vidro vem da areia e o plástico, do petróleo — ambos artificiais','São retirados prontos da natureza'],c:2},
+  {e:'Qual conjunto contém APENAS materiais naturais NÃO renováveis?',o:['Água, madeira e lã','Petróleo, ferro e carvão mineral','Plástico, vidro e aço','Couro, fibras e óleos vegetais'],c:1},
+  {e:'A água, a madeira e a lã são exemplos de recursos naturais renováveis porque:',o:['Foram feitos pelas pessoas','Não se esgotam ou podem se renovar','Demoram milhões de anos para se formar','São sempre artificiais'],c:1},
+  {e:'Para descobrir a massa de um pacote de arroz, o instrumento mais adequado é:',o:['A régua','A balança','O termômetro','O copo medidor'],c:1},
+  {e:'Um suco vem numa embalagem de 900 mL. A unidade "mL" está medindo qual propriedade?',o:['A massa','O volume','A densidade','A dureza'],c:1},
+  {e:'Um cubo de madeira tem 3 cm de lado. Seu volume é:',o:['9 cm³','27 cm³','12 cm³','6 cm³'],c:1},
+  {e:'Um bloco tem massa de 600 g e volume de 200 cm³. Sua densidade é:',o:['3 g/cm³','800 g/cm³','0,3 g/cm³','400 g/cm³'],c:0},
+  {e:'Ao colocar uma rolha na água, ela boia. Isso acontece porque a rolha tem densidade:',o:['Maior que a da água','Igual ou menor que a da água','Igual à do chumbo','Que não pode ser medida'],c:1},
+  {e:'Dois cubos têm o MESMO volume: um é de chumbo e o outro, de isopor. Podemos afirmar que:',o:['O isopor é mais denso','Os dois têm a mesma densidade','O chumbo é mais denso, pois tem mais massa no mesmo volume','Nenhum tem densidade'],c:2},
+  {e:'Pedro conseguiu riscar uma peça de vidro usando uma ponta de diamante, mas o vidro não risca o diamante. Isso mostra que o diamante:',o:['É menos duro que o vidro','Tem a mesma dureza do vidro','É mais duro que o vidro','É um isolante térmico'],c:2},
+  {e:'Entre os materiais abaixo, qual é o MENOS duro, sendo riscado com facilidade?',o:['Diamante','Aço','Talco','Ferro'],c:2},
+  {e:'Para construir a estrutura de uma ponte que aguente muito peso, o material mais indicado é o aço, por causa de sua:',o:['Solubilidade','Resistência mecânica','Elasticidade','Transparência'],c:1},
+  {e:'Um material que, ao ser esticado, volta sozinho à sua forma original possui:',o:['Dureza','Magnetismo','Elasticidade','Densidade alta'],c:2},
+  {e:'No preparo de um suco, o pó se dissolve na água. Nesse caso, a água é o ______ e o pó é o ______.',o:['soluto / solvente','solvente / soluto','ímã / metal','rejeito / resíduo'],c:1},
+  {e:'A água é chamada de "solvente universal" porque:',o:['É a substância mais pesada','Dissolve muitos materiais diferentes, como sal e açúcar','Nunca se mistura com nada','Conduz eletricidade'],c:1},
+  {e:'Joana misturou óleo e água num copo. Depois de um tempo, eles se separaram em camadas. Isso ocorre porque:',o:['O óleo é solúvel em água','O óleo NÃO é solúvel em água','A água evaporou','O óleo virou sal'],c:1},
+  {e:'Ao aproximar o polo NORTE de um ímã do polo NORTE de outro ímã, o que acontece?',o:['Eles se atraem','Eles se repelem (se afastam)','Eles derretem','Nada, pois ímãs não interagem'],c:1},
+  {e:'Qual destes objetos seria atraído por um ímã?',o:['Um copo de vidro','Uma borracha escolar','Um prego de ferro','Um lápis de madeira'],c:2},
+  {e:'A região ao redor de um ímã, onde ele consegue atrair metais mesmo sem encostar, chama-se:',o:['Polo sul','Campo magnético','Densidade','Solução'],c:1},
+  {e:'Uma panela de alumínio esquenta rápido no fogo. Isso mostra que o alumínio é:',o:['Um isolante térmico','Um bom condutor de calor','Um material magnético','Um solvente'],c:1},
+  {e:'Por que muitas marmitas térmicas conservam melhor a temperatura da comida?',o:['Porque são feitas de metal, bom condutor','Porque usam materiais isolantes térmicos, que seguram o calor','Porque são ímãs','Porque dissolvem o calor'],c:1},
+  {e:'Os fios elétricos são feitos de cobre por dentro porque o cobre:',o:['É isolante elétrico','É um bom condutor de eletricidade','Não deixa a corrente passar','É magnético'],c:1},
+  {e:'Um eletricista usa luvas e botas de borracha para evitar choques. A borracha é usada porque é:',o:['Um bom condutor de eletricidade','Um isolante elétrico','Um metal','Solúvel em água'],c:1},
+  {e:'Cascas de frutas que podem virar adubo e garrafas que podem ser recicladas são exemplos de:',o:['Rejeitos, que não podem ser reaproveitados','Resíduos, que ainda podem ser reaproveitados','Materiais artificiais','Solventes universais'],c:1},
+  {e:'Sobre a "história" de um objeto, da natureza até o lixo, a sequência CORRETA das etapas é:',o:['Consumo → Fabricação → Extração → Transporte → Descarte','Extração → Fabricação → Transporte → Consumo → Descarte','Descarte → Consumo → Transporte → Fabricação → Extração','Fabricação → Extração → Consumo → Descarte → Transporte'],c:1}
+];
+
+/* embaralha as alternativas de cada questão para o acerto não cair sempre na mesma letra */
+function emb(a){for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]];}return a;}
+Q.forEach(q=>{const correta=q.o[q.c];q.o=emb(q.o.slice());q.c=q.o.indexOf(correta);});
+
+let i=0;
+const respostas = new Array(Q.length).fill(null);
+const qbox=document.getElementById('qbox');
+
+function render(){
+  const q=Q[i];
+  let html=`<div class="q show"><div class="qn">QUESTÃO ${i+1}</div><p class="enun">${q.e}</p>`;
+  q.o.forEach((t,oi)=>{
+    const sel = respostas[i]===oi ? ' sel':'';
+    html+=`<button class="opc${sel}" onclick="escolhe(${oi})">${String.fromCharCode(97+oi)}) ${t}</button>`;
+  });
+  html+='</div>';
+  qbox.innerHTML=html;
+  document.getElementById('atual').textContent=i+1;
+  document.getElementById('barra').style.width=((i)/Q.length*100)+'%';
+  document.getElementById('respCount').textContent=respostas.filter(x=>x!==null).length+' ✓';
+  document.getElementById('btnAv').textContent = (i===Q.length-1)?'Finalizar 🏁':'Avançar ➡️';
+}
+
+function escolhe(oi){respostas[i]=oi;render();}
+function avancar(){
+  if(respostas[i]===null){alert('Escolha uma resposta antes de avançar. 😊');return;}
+  if(i===Q.length-1){finalizar();return;}
+  i++;render();
+}
+function voltar(){if(i>0){i--;render();}}
+
+function finalizar(){
+  let acertos=0;
+  Q.forEach((q,k)=>{if(respostas[k]===q.c)acertos++;});
+  document.getElementById('prova').style.display='none';
+  const r=document.getElementById('resultado');
+  r.classList.add('show');
+  const pct=Math.round(acertos/Q.length*100);
+  document.getElementById('nota').textContent=acertos+' / 25  ('+pct+'%)';
+  let emoji,txt;
+  if(pct>=90){emoji='🏆';txt='Incrível! Você dominou as duas unidades. Pode ir tranquilo(a) para a prova!';}
+  else if(pct>=70){emoji='🎉';txt='Muito bom! Veja o gabarito comentado para acertar aquelas que escaparam.';}
+  else if(pct>=50){emoji='💪';txt='Você está no caminho! Leia o gabarito com calma e revise o resumo.';}
+  else{emoji='📚';txt='Vamos revisar juntos! Volte à leitura guiada e ao resumo, depois refaça o simulado.';}
+  document.getElementById('emoji').textContent=emoji;
+  document.getElementById('rTexto').textContent=txt;
+  // guarda resultado para o gabarito (mesmo navegador)
+  try{localStorage.setItem('simCiencias', JSON.stringify(respostas));}catch(e){}
+}
+render();
+</script>
+</body>
+</html>

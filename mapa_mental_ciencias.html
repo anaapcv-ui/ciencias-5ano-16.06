@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Mental – Ciências 5º ano (Unidades 4 e 5)</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Comic Sans MS','Trebuchet MS',sans-serif}
+  body{background:linear-gradient(135deg,#fce4ec,#e3f2fd);color:#333;padding:14px;line-height:1.5}
+  .wrap{max-width:960px;margin:0 auto}
+  header{background:#fff;border-radius:20px;padding:18px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.1);border:3px solid #ce93d8}
+  header h1{color:#8e24aa;font-size:1.5rem}
+  .central{background:linear-gradient(135deg,#5c6bc0,#3949ab);color:#fff;border-radius:18px;padding:18px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.15)}
+  .central h2{text-align:center;margin-bottom:10px}
+  .linha{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .linha span{background:rgba(255,255,255,.2);border-radius:20px;padding:6px 12px;font-size:.85rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:16px}
+  .card{background:#fff;border-radius:18px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);border-top:7px solid var(--c);transition:transform .15s}
+  .card:hover{transform:translateY(-3px)}
+  .card h3{color:var(--c);display:flex;align-items:center;gap:8px;font-size:1.1rem}
+  .card .resumo{margin:8px 0;font-size:.92rem;color:#555}
+  .mais{display:none;font-size:.9rem;color:#444;background:#fafafa;border-radius:10px;padding:10px;margin-top:8px}
+  .mais.show{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .vbtn{background:var(--c);color:#fff;border:none;border-radius:20px;padding:7px 14px;font-size:.85rem;cursor:pointer;font-family:inherit;margin-top:6px}
+  .mini{margin-top:10px;background:#f3e5f5;border-radius:10px;padding:10px}
+  .mini p{font-weight:bold;font-size:.9rem;margin-bottom:6px}
+  .mini button{display:block;width:100%;text-align:left;background:#fff;border:2px solid #e1bee7;border-radius:8px;padding:7px 10px;margin:4px 0;cursor:pointer;font-size:.88rem;font-family:inherit}
+  .mini button.ok{background:#c8e6c9;border-color:#43a047}
+  .mini button.no{background:#ffcdd2;border-color:#e53935}
+  .mini .fb{font-size:.85rem;margin-top:5px;display:none}
+  .mini .fb.show{display:block}
+  .resumao{background:#fff8e1;border:3px dashed #ffb300;border-radius:18px;padding:18px;margin-top:18px}
+  .resumao h2{color:#ef6c00;text-align:center;margin-bottom:10px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .chips span{background:#ffe082;border-radius:16px;padding:6px 12px;font-size:.85rem;font-weight:bold;color:#6d4c00}
+  footer{text-align:center;color:#999;font-size:.8rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>🧠 Mapa Mental — Ciências 5º ano</h1><p>Unidade 4 (Propriedades dos materiais) + Unidade 5 (Resíduos)</p></header>
+
+  <div class="central">
+    <h2>🕒 A história de um objeto (linha do tempo)</h2>
+    <div class="linha">
+      <span>1️⃣ Extração ⛏️</span><span>➡️</span><span>2️⃣ Fabricação 🏭</span><span>➡️</span>
+      <span>3️⃣ Transporte 🚚</span><span>➡️</span><span>4️⃣ Consumo 🛒</span><span>➡️</span><span>5️⃣ Descarte 🗑️</span>
+    </div>
+    <p style="text-align:center;margin-top:10px;font-size:.85rem">Gera resíduos em TODAS as etapas!</p>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="resumao">
+    <h2>⭐ Resumão da Prova — palavras-chave</h2>
+    <div class="chips">
+      <span>Natural × Artificial</span><span>Renovável × Não renovável</span><span>Massa (balança)</span>
+      <span>Volume (L, cm³)</span><span>Densidade = massa÷volume</span><span>Flutua/Afunda</span>
+      <span>Resistência mecânica</span><span>Dureza (diamante↑ talco↓)</span><span>Elasticidade</span>
+      <span>Solubilidade (soluto+solvente)</span><span>Água = solvente universal</span><span>Magnetismo (polos)</span>
+      <span>Campo magnético</span><span>Condutor/Isolante térmico</span><span>Condutor/Isolante elétrico</span>
+      <span>Resíduo × Rejeito</span><span>Consumo</span><span>5 etapas do objeto</span>
+    </div>
+  </div>
+
+  <footer>Clique em "ver mais ➕" em cada card e responda o mini-quiz. 💜</footer>
+</div>
+
+<script>
+const cards=[
+ {c:'#ff7043',e:'🌳',t:'Origem dos materiais',r:'Naturais (da natureza) ou artificiais (feitos pelas pessoas).',
+  mais:'Naturais podem ser <b>renováveis</b> (água, madeira) ou <b>não renováveis</b> (petróleo, ferro). Artificiais: plástico (do petróleo), vidro (da areia), aço.',
+  q:'O plástico é um material...',o:['Natural renovável','Artificial','Natural não renovável'],ci:1},
+ {c:'#26a69a',e:'⚖️',t:'Massa, Volume e Densidade',r:'Massa = matéria; Volume = espaço; Densidade = massa ÷ volume.',
+  mais:'Massa na balança (kg, g). Volume em L, mL, cm³ (cubo = lado³). <b>Afunda</b> = mais denso que a água; <b>flutua</b> = menos denso.',
+  q:'Quem flutua na água tem densidade...',o:['Maior que a da água','Menor que a da água','Igual à do chumbo'],ci:1},
+ {c:'#ec407a',e:'💪',t:'Resistência, Dureza, Elasticidade',r:'Aguentar força, riscar e voltar à forma.',
+  mais:'<b>Resistência mecânica</b>: não quebra (aço). <b>Dureza</b>: diamante = mais duro, talco = menos duro. <b>Elasticidade</b>: borracha volta à forma.',
+  q:'O material mais duro da natureza é o...',o:['Talco','Ferro','Diamante'],ci:2},
+ {c:'#8d6e63',e:'🥤',t:'Solubilidade',r:'Capacidade de dissolver. Soluto + solvente.',
+  mais:'Soluto se dissolve (açúcar); solvente dissolve (água). <b>Água = solvente universal</b>. Óleo e areia NÃO se dissolvem na água.',
+  q:'No copo de água com açúcar, o solvente é...',o:['O açúcar','A água','O copo'],ci:1},
+ {c:'#ab47bc',e:'🧲',t:'Magnetismo',r:'Ímãs atraem metais como o ferro.',
+  mais:'Ímã tem <b>polo norte</b> e <b>polo sul</b>. Polos iguais se <b>repelem</b>; diferentes se <b>atraem</b>. Em volta há o <b>campo magnético</b>.',
+  q:'Dois polos iguais de ímãs...',o:['Se atraem','Se repelem','Derretem'],ci:1},
+ {c:'#ffa726',e:'🔥',t:'Condutibilidade',r:'Passar calor e eletricidade.',
+  mais:'Calor: condutores = metais (alumínio); isolantes = isopor, lã, madeira, plástico. Eletricidade: condutor = cobre; isolantes = plástico, borracha, vidro.',
+  q:'O metal usado dentro dos fios elétricos é o...',o:['Plástico','Cobre','Vidro'],ci:1},
+ {c:'#66bb6a',e:'♻️',t:'Resíduos (Unidade 5)',r:'Consumo, resíduos, rejeitos e as etapas do objeto.',
+  mais:'<b>Resíduo</b> pode ser reaproveitado; <b>rejeito</b> (lixo) não. Etapas: Extração → Fabricação → Transporte → Consumo → Descarte (geram resíduos em todas).',
+  q:'O que PODE ser reaproveitado é chamado de...',o:['Rejeito','Resíduo','Solvente'],ci:1}
+];
+
+const grid=document.getElementById('grid');
+cards.forEach((c,i)=>{
+  const d=document.createElement('div');
+  d.className='card';
+  d.style.setProperty('--c',c.c);
+  let opts=c.o.map((t,oi)=>`<button onclick="mq(this,${i},${oi},${c.ci})">${t}</button>`).join('');
+  d.innerHTML=`<h3><span>${c.e}</span> ${c.t}</h3>
+    <div class="resumo">${c.r}</div>
+    <button class="vbtn" onclick="ver(this)">ver mais ➕</button>
+    <div class="mais">${c.mais}</div>
+    <div class="mini"><p>🎯 Mini-quiz: ${c.q}</p>${opts}<div class="fb"></div></div>`;
+  grid.appendChild(d);
+});
+
+function ver(b){const m=b.nextElementSibling;m.classList.toggle('show');b.textContent=m.classList.contains('show')?'ver menos ➖':'ver mais ➕';}
+
+const done={};
+function mq(btn,i,esc,cor){
+  if(done[i])return;done[i]=true;
+  const mini=btn.parentElement;
+  const fb=mini.querySelector('.fb');
+  const botoes=mini.querySelectorAll('button');
+  if(esc===cor){btn.classList.add('ok');fb.textContent='✅ Isso mesmo!';}
+  else{btn.classList.add('no');botoes[cor].classList.add('ok');fb.textContent='💡 A resposta certa está em verde.';}
+  fb.classList.add('show');
+}
+</script>
+</body>
+</html>

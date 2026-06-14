@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumo Final – Ciências 5º ano (Unidades 4 e 5)</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Comic Sans MS','Trebuchet MS',sans-serif}
+  body{background:linear-gradient(135deg,#fff8e1,#e1f5fe);color:#333;padding:14px;line-height:1.5}
+  .wrap{max-width:920px;margin:0 auto}
+  header{background:linear-gradient(135deg,#7e57c2,#5c6bc0);color:#fff;border-radius:22px;padding:22px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+  header h1{font-size:1.6rem}
+  header p{margin-top:6px;opacity:.95}
+  .blink{font-size:2.2rem;animation:flo 2s ease-in-out infinite}
+  @keyframes flo{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  h2.sec{margin:24px 0 12px;color:#5c6bc0;font-size:1.3rem;display:flex;align-items:center;gap:8px}
+  /* LINHA DO TEMPO / SEQUÊNCIA */
+  .timeline{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .tl{flex:1;min-width:150px;background:#fff;border-radius:16px;padding:14px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.08);border-top:6px solid var(--c);position:relative;animation:up .5s both}
+  .tl .n{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--c);color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
+  .tl .em{font-size:2rem;margin:8px 0 4px}
+  .tl h3{font-size:1rem;color:var(--c)}
+  .tl p{font-size:.82rem;color:#666;margin-top:4px}
+  @keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  /* GRADE DE PALAVRAS */
+  .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+  .card{background:#fff;border-radius:14px;padding:14px;box-shadow:0 3px 10px rgba(0,0,0,.07);border-left:7px solid var(--c)}
+  .card b{color:var(--c);display:block;font-size:1.02rem;margin-bottom:3px}
+  .card span{font-size:.9rem;color:#555}
+  /* DICAS */
+  .dicas{background:#fff3e0;border:3px dashed #ffb300;border-radius:18px;padding:16px 20px}
+  .dicas li{margin:8px 0;list-style:none;padding-left:26px;position:relative}
+  .dicas li::before{content:'⭐';position:absolute;left:0}
+  /* QUIZ RELÂMPAGO */
+  .relamp{background:#fff;border-radius:16px;padding:8px;box-shadow:0 3px 10px rgba(0,0,0,.07)}
+  .rq{border-bottom:1px solid #eee}
+  .rq:last-child{border-bottom:none}
+  .rq button{width:100%;text-align:left;background:none;border:none;padding:14px;font-size:.98rem;cursor:pointer;font-family:inherit;display:flex;justify-content:space-between;gap:10px;color:#333}
+  .rq button:hover{background:#f3e5f5}
+  .rq .resp{display:none;padding:0 14px 14px;color:#2e7d32;font-weight:bold;animation:pop .3s}
+  .rq.open .resp{display:block}
+  .rq .ico{color:#ab47bc;transition:transform .3s}
+  .rq.open .ico{transform:rotate(180deg)}
+  @keyframes pop{from{opacity:0}to{opacity:1}}
+  /* BOTÃO JOGO */
+  .cta{text-align:center;margin:28px 0}
+  .cta a{display:inline-block;background:linear-gradient(135deg,#ff7043,#f4511e);color:#fff;text-decoration:none;font-size:1.25rem;padding:18px 30px;border-radius:40px;box-shadow:0 6px 16px rgba(244,81,30,.4);animation:puls 1.6s infinite}
+  @keyframes puls{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+  footer{text-align:center;color:#999;font-size:.8rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="blink">🌟🔬♻️</div>
+    <h1>Resumo Final — Bora arrasar!</h1>
+    <p>Ciências 5º ano • Unidade 4 (Propriedades dos materiais) + Unidade 5 (Resíduos)</p>
+  </header>
+
+  <h2 class="sec">⏳ A história de um objeto (na ordem!)</h2>
+  <p style="text-align:center;color:#777;margin-bottom:14px">Da natureza até o lixo, todo objeto passa por estas 5 etapas — e gera resíduos em todas elas:</p>
+  <div class="timeline">
+    <div class="tl" style="--c:#8d6e63"><div class="n">1</div><div class="em">⛏️</div><h3>Extração</h3><p>Tira-se a matéria-prima da natureza</p></div>
+    <div class="tl" style="--c:#ef6c00"><div class="n">2</div><div class="em">🏭</div><h3>Fabricação</h3><p>A matéria-prima vira produto</p></div>
+    <div class="tl" style="--c:#1976d2"><div class="n">3</div><div class="em">🚚</div><h3>Transporte</h3><p>O produto é levado e distribuído</p></div>
+    <div class="tl" style="--c:#43a047"><div class="n">4</div><div class="em">🛒</div><h3>Consumo</h3><p>A compra e o uso do produto</p></div>
+    <div class="tl" style="--c:#757575"><div class="n">5</div><div class="em">🗑️</div><h3>Descarte</h3><p>Quando deixa de ser útil</p></div>
+  </div>
+
+  <h2 class="sec">🔑 Palavras importantes (e o que significam)</h2>
+  <div class="grade">
+    <div class="card" style="--c:#ff7043"><b>Material natural × artificial</b><span>Natural vem da natureza (madeira, ferro); artificial é feito pelas pessoas (plástico, vidro, aço).</span></div>
+    <div class="card" style="--c:#ff7043"><b>Renovável × não renovável</b><span>Renovável não acaba/se renova (água, madeira); não renovável pode esgotar (petróleo, ferro).</span></div>
+    <div class="card" style="--c:#26a69a"><b>Massa</b><span>Quantidade de matéria. Mede-se na balança, em kg e g.</span></div>
+    <div class="card" style="--c:#26a69a"><b>Volume</b><span>Espaço que o corpo ocupa. Em L, mL e cm³. Cubo = lado × lado × lado.</span></div>
+    <div class="card" style="--c:#26a69a"><b>Densidade</b><span>Massa ÷ volume. Mais denso que a água = afunda; menos denso = flutua.</span></div>
+    <div class="card" style="--c:#ec407a"><b>Resistência mecânica</b><span>Aguentar força sem quebrar (ferro e aço nas construções).</span></div>
+    <div class="card" style="--c:#ec407a"><b>Dureza</b><span>Riscar outros e ser difícil de riscar. Diamante = mais duro; talco = menos duro.</span></div>
+    <div class="card" style="--c:#ec407a"><b>Elasticidade</b><span>Voltar à forma original depois de esticar (borracha).</span></div>
+    <div class="card" style="--c:#8d6e63"><b>Solubilidade</b><span>Capacidade de dissolver. Soluto (se dissolve) + solvente (dissolve). Água = solvente universal.</span></div>
+    <div class="card" style="--c:#ab47bc"><b>Magnetismo</b><span>Atrai metais (ferro). Ímã tem polo norte e sul. Iguais se repelem, diferentes se atraem.</span></div>
+    <div class="card" style="--c:#ffa726"><b>Condutibilidade térmica</b><span>Passar calor. Condutores: metais. Isolantes: isopor, lã, madeira, plástico.</span></div>
+    <div class="card" style="--c:#ffa726"><b>Condutibilidade elétrica</b><span>Passar eletricidade. Condutor: cobre. Isolantes: plástico, borracha, vidro.</span></div>
+    <div class="card" style="--c:#66bb6a"><b>Resíduo × rejeito</b><span>Resíduo pode ser reaproveitado; rejeito (lixo) não pode mais.</span></div>
+    <div class="card" style="--c:#66bb6a"><b>Consumo</b><span>Comprar e usar produtos/serviços para atender necessidades.</span></div>
+  </div>
+
+  <h2 class="sec">🎯 Dicas de prova (decore estas!)</h2>
+  <div class="dicas">
+    <ul>
+      <li><b>Densidade = massa ÷ volume.</b> Afunda = mais denso que a água; flutua = menos denso.</li>
+      <li><b>Diamante</b> = material mais duro. <b>Talco</b> = o menos duro.</li>
+      <li><b>Polos iguais se repelem; polos diferentes se atraem.</b></li>
+      <li><b>Cobre</b> conduz eletricidade; <b>plástico e borracha</b> são isolantes.</li>
+      <li>Metais conduzem calor; <b>isopor, lã, madeira e plástico</b> são isolantes térmicos.</li>
+      <li><b>Água = solvente universal</b> (dissolve sal e açúcar). Óleo e areia NÃO se dissolvem.</li>
+      <li>Etapas do objeto, na ordem: <b>Extração → Fabricação → Transporte → Consumo → Descarte.</b></li>
+      <li>Volume do cubo: <b>lado × lado × lado</b> (5 cm → 125 cm³).</li>
+    </ul>
+  </div>
+
+  <h2 class="sec">⚡ Quiz relâmpago (clique para ver a resposta)</h2>
+  <div class="relamp" id="relamp"></div>
+
+  <div class="cta">
+    <a href="jogo_vf_ciencias.html">🎮 Quero jogar Verdadeiro ou Falso!</a>
+  </div>
+
+  <footer>Você estudou direitinho! Agora é só praticar com o jogo e o simulado. 💜</footer>
+</div>
+
+<script>
+const rqs = [
+  ['O que é densidade?','É a relação entre massa e volume (massa ÷ volume).'],
+  ['Qual o material mais duro da natureza?','O diamante.'],
+  ['O que acontece com polos iguais de dois ímãs?','Eles se repelem (se afastam).'],
+  ['Qual metal é usado dentro dos fios por conduzir eletricidade?','O cobre.'],
+  ['Cite 2 isolantes térmicos.','Isopor, lã, madeira ou plástico (qualquer dois).'],
+  ['Por que a água é o solvente universal?','Porque dissolve muitos materiais, como sal e açúcar.'],
+  ['Diferença entre resíduo e rejeito?','Resíduo pode ser reaproveitado; rejeito (lixo) não pode mais.'],
+  ['Quais são as 5 etapas da história de um objeto?','Extração → Fabricação → Transporte → Consumo → Descarte.'],
+  ['Um objeto que afunda na água tem densidade...','...maior que a da água.'],
+  ['O plástico é feito a partir de qual matéria-prima?','Do petróleo.']
+];
+const r = document.getElementById('relamp');
+rqs.forEach((x,i)=>{
+  const d = document.createElement('div');
+  d.className='rq';
+  d.innerHTML = `<button onclick="this.parentElement.classList.toggle('open')"><span>❓ ${x[0]}</span><span class="ico">▼</span></button><div class="resp">✅ ${x[1]}</div>`;
+  r.appendChild(d);
+});
+</script>
+</body>
+</html>

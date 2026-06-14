@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leitura Guiada – Ciências 5º ano (Unidades 4 e 5)</title>
+<style>
+  :root{
+    --b1:#ff7043; --b2:#26a69a; --b3:#5c6bc0; --b4:#ec407a;
+    --b5:#8d6e63; --b6:#ab47bc; --b7:#ffa726; --b8:#66bb6a; --rev:#42a5f5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Comic Sans MS','Trebuchet MS',sans-serif}
+  body{background:linear-gradient(135deg,#e3f2fd,#fff3e0);color:#333;padding:14px;line-height:1.55}
+  .wrap{max-width:880px;margin:0 auto}
+  header{background:#fff;border-radius:22px;padding:18px 20px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.1);border:3px solid #ffca28}
+  header h1{font-size:1.55rem;color:#5c6bc0}
+  header p{color:#777;margin-top:6px;font-size:.95rem}
+  .mascote{font-size:2.4rem}
+  .placar{position:sticky;top:8px;z-index:20;background:#fff;border-radius:16px;padding:10px 14px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.1);display:flex;align-items:center;gap:12px;border:2px solid #ffe082}
+  .barra{flex:1;height:18px;background:#eee;border-radius:10px;overflow:hidden}
+  .barra > div{height:100%;width:0;background:linear-gradient(90deg,#66bb6a,#26a69a);transition:width .5s}
+  .estrelas{font-weight:bold;color:#f9a825;white-space:nowrap;font-size:1.05rem}
+  .bloco{background:#fff;border-radius:18px;margin:14px 0;box-shadow:0 4px 14px rgba(0,0,0,.08);overflow:hidden;border-left:10px solid var(--cor)}
+  .cab{padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;user-select:none}
+  .cab:hover{background:#fafafa}
+  .cab .emoji{font-size:1.9rem}
+  .cab h2{font-size:1.15rem;color:var(--cor);flex:1}
+  .cab .seta{font-size:1.3rem;transition:transform .3s;color:#bbb}
+  .bloco.aberto .seta{transform:rotate(90deg)}
+  .corpo{display:none;padding:0 18px 18px}
+  .bloco.aberto .corpo{display:block;animation:abre .4s}
+  @keyframes abre{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+  .corpo p{margin:10px 0}
+  .conceitos{background:#fffde7;border:2px dashed #ffca28;border-radius:14px;padding:12px 16px;margin:14px 0}
+  .conceitos h3{color:#f9a825;margin-bottom:6px;font-size:1rem}
+  .conceitos b{color:#e65100}
+  .quiz{background:#f5f5f5;border-radius:14px;padding:14px;margin-top:14px}
+  .quiz h4{color:var(--cor);margin-bottom:10px}
+  .pergunta{margin-bottom:16px}
+  .pergunta>p{font-weight:bold;margin-bottom:8px}
+  .opc{display:block;width:100%;text-align:left;background:#fff;border:2px solid #ddd;border-radius:10px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;transition:.15s}
+  .opc:hover{border-color:var(--cor);transform:translateX(3px)}
+  .opc.certa{background:#c8e6c9;border-color:#43a047;font-weight:bold}
+  .opc.errada{background:#ffcdd2;border-color:#e53935}
+  .fb{margin-top:6px;padding:8px 12px;border-radius:10px;font-size:.9rem;display:none}
+  .fb.ok{background:#e8f5e9;color:#2e7d32;display:block;animation:pop .3s}
+  .fb.no{background:#fff3e0;color:#e65100;display:block;animation:pop .3s}
+  @keyframes pop{from{transform:scale(.9)}to{transform:scale(1)}}
+  .fim{background:#fff;border-radius:18px;padding:22px;text-align:center;margin:16px 0;border:3px dashed #66bb6a;display:none}
+  .fim.show{display:block}
+  .fim h2{color:#2e7d32}
+  .btn{display:inline-block;background:#5c6bc0;color:#fff;border:none;border-radius:30px;padding:12px 22px;font-size:1rem;cursor:pointer;margin-top:10px;font-family:inherit}
+  .btn:hover{background:#3f51b5}
+  footer{text-align:center;color:#999;font-size:.8rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mascote">🔬🧲🌍</div>
+    <h1>Leitura Guiada de Ciências</h1>
+    <p><b>Unidade 4 – Propriedades físicas dos materiais</b> &nbsp;•&nbsp; <b>Unidade 5 – Resíduos</b><br>
+    Olá! Eu sou a <b>Nina</b> e este é o <b>Téo</b>. Vamos ler juntos, devagarinho, clicando em cada caixa. 😄</p>
+  </header>
+
+  <div class="placar">
+    <span style="font-size:1.4rem">⭐</span>
+    <div class="barra"><div id="barra"></div></div>
+    <span class="estrelas"><span id="ganhas">0</span>/<span id="total">0</span> estrelas</span>
+  </div>
+
+  <div id="blocos"></div>
+
+  <div class="fim" id="fim">
+    <h2>🎉 Você terminou a Leitura Guiada!</h2>
+    <p id="fimMsg"></p>
+    <button class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">Voltar ao topo ⬆️</button>
+  </div>
+
+  <footer>Material de estudo feito com carinho para você arrasar na prova. 💚</footer>
+</div>
+
+<script>
+/* ===== CONTEÚDO ===== */
+const blocos = [
+{
+  cor:'--b1', emoji:'🌳', titulo:'Bloco 1 — De onde vêm os materiais?',
+  texto:`Tudo o que usamos no dia a dia é feito de <b>materiais</b>, e todo material é feito de <b>matéria</b>.
+  De acordo com a origem, os materiais podem ser <b>naturais</b> ou <b>artificiais</b>.
+  <br><br><b>Materiais naturais</b> são tirados da natureza. Eles podem ser:
+  <br>• <b>Renováveis</b>: não se esgotam ou se renovam com o tempo. Exemplos: água, madeira, fibras naturais, óleos vegetais, couro e lã.
+  <br>• <b>Não renováveis</b>: a natureza levou milhões de anos para formar. São finitos e podem acabar. Exemplos: ferro, petróleo, bauxita (de onde vem o alumínio) e carvão mineral.
+  <br><br><b>Materiais artificiais</b> não existem na natureza: foram criados pelas pessoas, usando materiais naturais. Exemplos: o plástico (feito de petróleo), o vidro (feito de areia) e o aço (uma liga de metais).`,
+  conceitos:`<b>Material:</b> aquilo de que os objetos são feitos. • <b>Natural:</b> vem da natureza. • <b>Renovável:</b> não acaba/se renova (madeira, água). • <b>Não renovável:</b> pode acabar (petróleo, ferro). • <b>Artificial:</b> feito pelo ser humano (plástico, vidro, aço).`,
+  quiz:[
+    {q:'Qual destes é um material ARTIFICIAL (feito pelas pessoas)?',
+     o:['Madeira','Plástico','Água','Couro'],c:1,
+     ok:'Isso! O plástico é feito de petróleo pelas indústrias, então é artificial.',
+     no:'Quase! Madeira, água e couro vêm da natureza. O artificial é o plástico.'},
+    {q:'O petróleo e o ferro são exemplos de materiais naturais...',
+     o:['Renováveis, porque nunca acabam','Não renováveis, porque podem se esgotar','Artificiais','Que se renovam todo dia'],c:1,
+     ok:'Exato! A natureza demora milhões de anos para formá-los, por isso podem acabar.',
+     no:'Lembre: petróleo e ferro demoram milhões de anos para se formar, então são NÃO renováveis.'},
+    {q:'O vidro é feito a partir de qual material natural?',
+     o:['Areia','Madeira','Lã','Petróleo'],c:0,
+     ok:'Boa! O vidro é fabricado a partir da areia.',
+     no:'Na verdade o vidro é feito de areia. (O plástico é que vem do petróleo.)'}
+  ]
+},
+{
+  cor:'--b2', emoji:'⚖️', titulo:'Bloco 2 — Massa, Volume e Densidade',
+  texto:`Cada material tem características que ajudam a reconhecê-lo. Elas se chamam <b>propriedades físicas</b>.
+  <br><br><b>Massa</b> é a quantidade de matéria de um corpo. Medimos a massa com uma <b>balança</b>. As unidades são o <b>quilograma (kg)</b> e o <b>grama (g)</b>.
+  <br><br><b>Volume</b> é o espaço que um corpo ocupa. As unidades mais comuns são o <b>litro (L)</b> e o <b>mililitro (mL)</b>; também usamos o m³ e o cm³. O volume de um cubo é: lado × lado × lado. Ex.: um cubo de 5 cm → 5 × 5 × 5 = <b>125 cm³</b>.
+  <br><br><b>Densidade</b> é a relação entre a massa e o volume: <b>densidade = massa ÷ volume</b>. Dois objetos do mesmo tamanho (mesmo volume): o que tem mais massa é mais denso. Por isso o chumbo é mais denso que o isopor.
+  <br><br><b>Flutuação:</b> um objeto <b>afunda</b> quando tem densidade <b>maior</b> que a da água; e <b>flutua</b> quando tem densidade <b>igual ou menor</b> que a da água.`,
+  conceitos:`<b>Massa:</b> quantidade de matéria (kg, g) – mede-se na balança. • <b>Volume:</b> espaço que o corpo ocupa (L, mL, cm³). • <b>Densidade = massa ÷ volume.</b> • <b>Afunda</b> = mais denso que a água; <b>flutua</b> = menos denso que a água.`,
+  quiz:[
+    {q:'Com qual instrumento medimos a MASSA de um material?',
+     o:['Régua','Balança','Termômetro','Copo medidor'],c:1,
+     ok:'Certinho! A massa é medida na balança, em quilogramas ou gramas.',
+     no:'A massa é medida na balança (em kg ou g). O copo medidor mede volume.'},
+    {q:'Um cubo tem 5 cm de lado. Qual é o seu volume?',
+     o:['15 cm³','25 cm³','125 cm³','55 cm³'],c:2,
+     ok:'Mandou bem! 5 × 5 × 5 = 125 cm³.',
+     no:'É só multiplicar lado × lado × lado: 5 × 5 × 5 = 125 cm³.'},
+    {q:'Por que o isopor FLUTUA na água?',
+     o:['Porque é muito grande','Porque tem densidade menor que a da água','Porque é pesado','Porque tem muita massa'],c:1,
+     ok:'Isso mesmo! Quem flutua tem densidade igual ou menor que a da água.',
+     no:'Flutua porque sua densidade é MENOR que a da água, não por causa do tamanho.'}
+  ]
+},
+{
+  cor:'--b4', emoji:'💪', titulo:'Bloco 3 — Resistência, Dureza e Elasticidade',
+  texto:`<b>Resistência mecânica</b> é a capacidade de um material aguentar forças sem se romper (sem quebrar). Materiais resistentes são difíceis de quebrar quando caem ou sofrem impacto. Por isso o <b>ferro</b> e o <b>aço</b> são usados na estrutura de casas, prédios e pontes.
+  <br><br><b>Dureza</b> é a capacidade de um material riscar outro e de ser difícil de riscar. Um material mais duro risca um menos duro. O <b>diamante</b> é o material <b>mais duro</b> da natureza (risca qualquer outro). O <b>talco</b> é o mineral <b>menos duro</b> (é riscado facilmente).
+  <br><br><b>Elasticidade</b> é a capacidade de um material voltar à sua forma original depois que a força que o esticou ou amassou deixa de agir. Um exemplo é o <b>elástico de borracha</b>: você estica e ele volta sozinho.`,
+  conceitos:`<b>Resistência mecânica:</b> aguenta força sem quebrar (ferro, aço). • <b>Dureza:</b> risca outros e é difícil de riscar — <b>diamante</b> = mais duro; <b>talco</b> = menos duro. • <b>Elasticidade:</b> volta à forma original (borracha).`,
+  quiz:[
+    {q:'Qual é o material MAIS DURO que existe na natureza?',
+     o:['Talco','Ferro','Diamante','Madeira'],c:2,
+     ok:'Exato! O diamante é tão duro que risca qualquer outro material.',
+     no:'É o diamante — ele risca todos os outros. O talco é o MENOS duro.'},
+    {q:'Por que usamos ferro e aço na estrutura de prédios e pontes?',
+     o:['Porque são bonitos','Porque têm alta resistência mecânica','Porque são leves','Porque flutuam'],c:1,
+     ok:'Boa! Eles aguentam muita força sem se romper.',
+     no:'É por causa da resistência mecânica: aguentam grandes forças sem quebrar.'},
+    {q:'Um elástico de borracha é esticado e depois volta ao normal. Que propriedade é essa?',
+     o:['Dureza','Elasticidade','Magnetismo','Solubilidade'],c:1,
+     ok:'Isso! Voltar à forma original é a elasticidade.',
+     no:'Voltar à forma original depois de esticar é a elasticidade.'}
+  ]
+},
+{
+  cor:'--b5', emoji:'🥤', titulo:'Bloco 4 — Solubilidade',
+  texto:`<b>Solubilidade</b> é a capacidade de um material dissolver outro. O material que <b>se dissolve</b> é o <b>soluto</b>; o material que <b>dissolve</b> é o <b>solvente</b>.
+  <br><br>A <b>água</b> é chamada de <b>solvente universal</b> porque consegue dissolver muitos materiais diferentes, como o açúcar e o sal de cozinha. Por isso dizemos que esses materiais são <b>solúveis</b> em água.
+  <br><br>Mas atenção: nem tudo se dissolve na água! A <b>areia</b>, a <b>gasolina</b> e o <b>óleo</b> <b>não</b> são solúveis em água — eles se separam, em vez de se misturar.`,
+  conceitos:`<b>Solubilidade:</b> capacidade de dissolver. • <b>Soluto:</b> o que se dissolve (açúcar). • <b>Solvente:</b> o que dissolve (água). • <b>Água = solvente universal.</b> • <b>Não dissolvem na água:</b> areia, óleo, gasolina.`,
+  quiz:[
+    {q:'No copo de água com açúcar, quem é o SOLUTO?',
+     o:['A água','O açúcar','O copo','O ar'],c:1,
+     ok:'Certo! O açúcar é o soluto (ele se dissolve). A água é o solvente.',
+     no:'O soluto é o que se dissolve: o açúcar. A água é o solvente.'},
+    {q:'Por que a água é chamada de "solvente universal"?',
+     o:['Porque é a maior do mundo','Porque dissolve muitos materiais diferentes','Porque é transparente','Porque congela'],c:1,
+     ok:'Isso! Ela dissolve muitos materiais, como sal e açúcar.',
+     no:'É porque ela dissolve vários materiais diferentes (sal, açúcar...).'},
+    {q:'Qual destes materiais NÃO se dissolve na água?',
+     o:['Sal de cozinha','Açúcar','Óleo','Suco em pó'],c:2,
+     ok:'Boa! O óleo não se dissolve na água: eles se separam.',
+     no:'O óleo não se dissolve na água. Sal e açúcar, sim.'}
+  ]
+},
+{
+  cor:'--b6', emoji:'🧲', titulo:'Bloco 5 — Magnetismo',
+  texto:`<b>Magnetismo</b> é a propriedade de alguns materiais de <b>atrair</b> outros, especialmente metais como o <b>ferro</b>. Os objetos que conseguem atrair esses materiais são chamados de <b>ímãs</b>.
+  <br><br>Todo ímã tem duas extremidades: o <b>polo norte</b> e o <b>polo sul</b>. É nessas pontas que a força de atração é maior.
+  <br><br>Quando aproximamos dois ímãs:
+  <br>• <b>Polos iguais se repelem</b> (se afastam).
+  <br>• <b>Polos diferentes se atraem</b> (se grudam).
+  <br><br>Ao redor do ímã existe uma região chamada <b>campo magnético</b>. Quanto mais perto do ímã, mais forte é esse campo — por isso o ímã atrai um clipe mesmo sem encostar.`,
+  conceitos:`<b>Magnetismo:</b> atrair metais como o ferro. • <b>Ímã:</b> tem <b>polo norte</b> e <b>polo sul</b>. • <b>Polos iguais se repelem; polos diferentes se atraem.</b> • <b>Campo magnético:</b> região em volta do ímã (mais forte quanto mais perto).`,
+  quiz:[
+    {q:'O que acontece quando aproximamos DOIS POLOS IGUAIS de ímãs?',
+     o:['Eles se atraem','Eles se repelem (se afastam)','Nada acontece','Eles derretem'],c:1,
+     ok:'Isso! Polos iguais se repelem. Polos diferentes é que se atraem.',
+     no:'Polos iguais se REPELEM. São os polos diferentes que se atraem.'},
+    {q:'Qual material costuma ser atraído por um ímã?',
+     o:['Borracha','Vidro','Ferro','Madeira'],c:2,
+     ok:'Certo! O ferro é atraído pelo ímã. Borracha, vidro e madeira não.',
+     no:'É o ferro (um metal). Borracha, vidro e madeira não são atraídos.'},
+    {q:'Como se chama a região em volta do ímã onde ele consegue atrair, mesmo sem encostar?',
+     o:['Campo magnético','Polo sul','Solubilidade','Densidade'],c:0,
+     ok:'Boa! É o campo magnético — mais forte quanto mais perto do ímã.',
+     no:'Essa região é o campo magnético.'}
+  ]
+},
+{
+  cor:'--b7', emoji:'🔥', titulo:'Bloco 6 — Condutibilidade (calor e eletricidade)',
+  texto:`<b>Condutibilidade térmica</b> tem a ver com o <b>calor</b>. Quando dois corpos em temperaturas diferentes se encostam, o mais quente passa energia para o mais frio. Essa energia em movimento é o <b>calor</b>.
+  <br>• <b>Bons condutores de calor:</b> deixam o calor passar com facilidade — ferro, alumínio e outros metais.
+  <br>• <b>Isolantes térmicos:</b> não deixam o calor passar bem — isopor, lã, ar, madeira e plástico. (Por isso a panela é de metal, mas o cabo é de plástico ou madeira: para não nos queimarmos.)
+  <br><br><b>Condutibilidade elétrica</b> tem a ver com a <b>eletricidade</b>.
+  <br>• <b>Bons condutores de eletricidade:</b> alguns metais, principalmente o <b>cobre</b>.
+  <br>• <b>Isolantes elétricos:</b> não deixam a eletricidade passar — plástico, borracha, vidro e cortiça. (Por isso os fios são de cobre por dentro e revestidos de plástico por fora.)`,
+  conceitos:`<b>Calor:</b> energia térmica que vai do mais quente para o mais frio. • <b>Condutores de calor:</b> metais (ferro, alumínio). • <b>Isolantes térmicos:</b> isopor, lã, madeira, plástico. • <b>Condutor de eletricidade:</b> cobre. • <b>Isolantes elétricos:</b> plástico, borracha, vidro.`,
+  quiz:[
+    {q:'Por que o cabo de uma panela costuma ser de plástico ou madeira?',
+     o:['Para ficar bonito','Porque são isolantes térmicos e não esquentam tão rápido','Porque são metais','Porque conduzem bem o calor'],c:1,
+     ok:'Exato! Plástico e madeira são isolantes térmicos: seguram o calor e protegem a mão.',
+     no:'É porque são isolantes térmicos: não deixam o calor passar fácil, protegendo nossas mãos.'},
+    {q:'Qual material é um BOM condutor de eletricidade, usado dentro dos fios?',
+     o:['Plástico','Borracha','Cobre','Vidro'],c:2,
+     ok:'Certinho! O cobre conduz bem a eletricidade.',
+     no:'É o cobre. Plástico, borracha e vidro são isolantes elétricos.'},
+    {q:'O isopor e a lã são exemplos de...',
+     o:['Bons condutores de calor','Isolantes térmicos','Materiais magnéticos','Solventes'],c:1,
+     ok:'Boa! Eles seguram o calor — são isolantes térmicos.',
+     no:'São isolantes térmicos: não deixam o calor passar com facilidade.'}
+  ]
+},
+{
+  cor:'--b8', emoji:'♻️', titulo:'Bloco 7 — Resíduos (Unidade 5)',
+  texto:`<b>Consumo</b> é o ato de comprar ou usar produtos e serviços para atender às nossas necessidades. Consumimos o tempo todo, às vezes sem perceber (água no banho, energia, alimentos...).
+  <br><br>Quando descartamos algo, geramos:
+  <br>• <b>Resíduos</b>: materiais que jogamos fora depois de usar, mas que <b>ainda podem ser reaproveitados</b>.
+  <br>• <b>Rejeitos (lixo)</b>: o que jogamos fora e <b>não pode mais ser reaproveitado</b>.
+  <br><br>Todo objeto tem uma "história", com etapas que consomem materiais e energia e geram resíduos em <b>todas</b> elas. As etapas são, nesta ordem:
+  <br><b>1) Extração da matéria-prima</b> (tirada da natureza) → <b>2) Fabricação</b> (a matéria-prima vira produto) → <b>3) Transporte</b> (o produto é levado e distribuído) → <b>4) Consumo</b> (a compra e o uso) → <b>5) Descarte</b> (quando o produto deixa de ser útil).
+  <br><br>Esse caminho num único sentido pode esgotar os recursos naturais e acumular resíduos na natureza.`,
+  conceitos:`<b>Consumo:</b> comprar/usar para atender necessidades. • <b>Resíduo:</b> pode ser reaproveitado. • <b>Rejeito (lixo):</b> NÃO pode ser reaproveitado. • <b>Etapas:</b> Extração → Fabricação → Transporte → Consumo → Descarte (geram resíduos em todas).`,
+  quiz:[
+    {q:'Qual é a diferença entre RESÍDUO e REJEITO?',
+     o:['São a mesma coisa','Resíduo pode ser reaproveitado; rejeito não pode','Rejeito pode ser reaproveitado; resíduo não','Resíduo é só comida'],c:1,
+     ok:'Isso! Resíduo ainda dá para reaproveitar; rejeito (lixo) não dá mais.',
+     no:'Resíduo PODE ser reaproveitado; rejeito (lixo) NÃO pode mais.'},
+    {q:'Qual é a PRIMEIRA etapa da história de um objeto?',
+     o:['Descarte','Consumo','Extração da matéria-prima','Transporte'],c:2,
+     ok:'Certo! Tudo começa tirando a matéria-prima da natureza.',
+     no:'A primeira etapa é a extração da matéria-prima (da natureza).'},
+    {q:'Em quais etapas da história de um objeto são gerados resíduos?',
+     o:['Só no descarte','Só na fabricação','Em todas as etapas','Em nenhuma'],c:2,
+     ok:'Boa! Da extração ao descarte, todas as etapas geram resíduos.',
+     no:'São geradas em TODAS as etapas, da extração até o descarte.'}
+  ]
+},
+{
+  cor:'--rev', emoji:'🏆', titulo:'Bloco 8 — Revisão Geral (tudo misturado!)',
+  texto:`Chegou a hora de misturar tudo o que vimos das duas unidades! Leia com calma e responda. Se errar, não tem problema: leia a dica e tente entender. 💪`,
+  conceitos:`Dica de ouro: <b>densidade</b> = massa ÷ volume; <b>diamante</b> = mais duro; <b>cobre</b> = conduz eletricidade; <b>água</b> = solvente universal; <b>polos iguais se repelem</b>; <b>resíduo</b> pode ser reaproveitado.`,
+  quiz:[
+    {q:'Uma moeda colocada na água AFUNDA. O que podemos concluir?',
+     o:['Que ela tem densidade menor que a da água','Que ela tem densidade maior que a da água','Que ela é um ímã','Que ela é solúvel'],c:1,
+     ok:'Exato! Quem afunda tem densidade MAIOR que a da água.',
+     no:'Afunda porque tem densidade MAIOR que a da água.'},
+    {q:'Um eletricista usa luvas de borracha para não tomar choque. Isso acontece porque a borracha é...',
+     o:['Um bom condutor de eletricidade','Um isolante elétrico','Um ímã','Solúvel em água'],c:1,
+     ok:'Certo! A borracha é isolante elétrica: não deixa a eletricidade passar.',
+     no:'A borracha é isolante elétrica: por isso protege contra o choque.'},
+    {q:'Garrafas plásticas usadas que ainda podem ser recicladas são um exemplo de...',
+     o:['Rejeito','Resíduo','Matéria-prima natural','Solvente'],c:1,
+     ok:'Boa! Como ainda podem ser reaproveitadas, são resíduos.',
+     no:'Se ainda podem ser reaproveitadas/recicladas, são resíduos (não rejeitos).'},
+    {q:'O plástico é um material artificial feito a partir de qual matéria-prima?',
+     o:['Areia','Petróleo','Madeira','Água'],c:1,
+     ok:'Isso! O plástico vem do petróleo.',
+     no:'O plástico é feito de petróleo. (A areia vira vidro.)'}
+  ]
+}
+];
+
+/* ===== MONTAGEM ===== */
+let totalPerguntas = 0, respondidas = 0, estrelas = 0;
+const cont = document.getElementById('blocos');
+
+blocos.forEach((b, bi)=>{
+  const div = document.createElement('div');
+  div.className = 'bloco';
+  div.style.setProperty('--cor', `var(${b.cor})`);
+  let quizHtml = `<div class="quiz"><h4>📝 Hora de responder!</h4>`;
+  b.quiz.forEach((p, pi)=>{
+    totalPerguntas++;
+    let opc = p.o.map((t,oi)=>`<button class="opc" onclick="resp(this,${bi},${pi},${oi},${p.c})">${t}</button>`).join('');
+    quizHtml += `<div class="pergunta" id="p${bi}_${pi}"><p>${pi+1}) ${p.q}</p>${opc}<div class="fb" id="fb${bi}_${pi}"></div></div>`;
+  });
+  quizHtml += `</div>`;
+  div.innerHTML = `
+    <div class="cab" onclick="toggle(this)">
+      <span class="emoji">${b.emoji}</span>
+      <h2>${b.titulo}</h2>
+      <span class="seta">▶</span>
+    </div>
+    <div class="corpo">
+      <p>${b.texto}</p>
+      <div class="conceitos"><h3>📦 Palavras e conceitos importantes</h3><p>${b.conceitos}</p></div>
+      ${quizHtml}
+    </div>`;
+  cont.appendChild(div);
+});
+
+document.getElementById('total').textContent = totalPerguntas;
+
+function toggle(cab){ cab.parentElement.classList.toggle('aberto'); }
+
+const jaResp = {};
+function resp(btn, bi, pi, escolha, certa){
+  const key = bi+'_'+pi;
+  if(jaResp[key]) return;
+  jaResp[key] = true;
+  respondidas++;
+  const fb = document.getElementById('fb'+key);
+  const dados = blocos[bi].quiz[pi];
+  const botoes = btn.parentElement.querySelectorAll('.opc');
+  if(escolha === certa){
+    btn.classList.add('certa');
+    fb.className = 'fb ok';
+    fb.textContent = '✅ ' + dados.ok;
+    estrelas++;
+  } else {
+    btn.classList.add('errada');
+    botoes[certa].classList.add('certa');
+    fb.className = 'fb no';
+    fb.textContent = '💡 ' + dados.no;
+  }
+  botoes.forEach(b=>b.style.cursor='default');
+  atualiza();
+}
+
+function atualiza(){
+  document.getElementById('ganhas').textContent = estrelas;
+  document.getElementById('barra').style.width = (respondidas/totalPerguntas*100)+'%';
+  if(respondidas === totalPerguntas){
+    const fim = document.getElementById('fim');
+    fim.classList.add('show');
+    let msg;
+    const pct = estrelas/totalPerguntas;
+    if(pct===1) msg = `PERFEITO! Você acertou TODAS as ${totalPerguntas} estrelas! 🌟 Você está voando para a prova!`;
+    else if(pct>=0.7) msg = `Muito bem! Você ganhou ${estrelas} de ${totalPerguntas} estrelas. Está quase lá — revise as dicas e arrasa! 💪`;
+    else msg = `Você ganhou ${estrelas} de ${totalPerguntas} estrelas. Que tal abrir os blocos de novo e reler as caixinhas? Você consegue! 🤗`;
+    document.getElementById('fimMsg').textContent = msg;
+    fim.scrollIntoView({behavior:'smooth'});
+  }
+}
+
+/* abre o primeiro bloco automaticamente */
+cont.firstElementChild.classList.add('aberto');
+</script>
+</body>
+</html>

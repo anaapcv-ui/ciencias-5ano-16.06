@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabarito Comentado – Simulado de Ciências 5º ano</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Trebuchet MS','Comic Sans MS',sans-serif}
+  body{background:#f4f6fb;color:#333;padding:14px;line-height:1.55}
+  .wrap{max-width:780px;margin:0 auto}
+  header{background:linear-gradient(135deg,#00897b,#26a69a);color:#fff;border-radius:20px;padding:20px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+  header h1{font-size:1.45rem}
+  h2.sec{margin:22px 0 10px;color:#00897b}
+  /* tabela rápida */
+  .tabela{background:#fff;border-radius:14px;padding:14px;box-shadow:0 3px 10px rgba(0,0,0,.07);display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+  .cel{background:#e0f2f1;border-radius:8px;padding:8px 10px;font-size:.85rem;display:flex;gap:8px;align-items:baseline}
+  .cel b{color:#00695c;flex-shrink:0}
+  .cel small{color:#004d40;font-weight:bold;line-height:1.3}
+  /* comentários */
+  .item{background:#fff;border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 3px 10px rgba(0,0,0,.06);border-left:6px solid #26a69a}
+  .item .qn{color:#00897b;font-weight:bold}
+  .item .enun{margin:6px 0;font-style:italic;color:#555}
+  .item .cor{background:#e8f5e9;border-radius:8px;padding:8px 12px;margin:8px 0;font-weight:bold;color:#2e7d32}
+  .item .com{font-size:.95rem;color:#444}
+  .item .com b{color:#00695c}
+  footer{text-align:center;color:#999;font-size:.8rem;margin:18px 0}
+  @media print{body{background:#fff}.item{box-shadow:none;border:1px solid #ddd}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📖 Gabarito Comentado</h1>
+    <p>Simulado de Ciências — Unidades 4 e 5 (5º ano)</p>
+  </header>
+
+  <h2 class="sec">✅ Tabela rápida de respostas</h2>
+  <div class="tabela" id="tabela"></div>
+
+  <h2 class="sec">💬 Comentário de cada questão</h2>
+  <div id="coment"></div>
+
+  <footer>Para o responsável: confira aqui o porquê de cada resposta certa e errada. 💚</footer>
+</div>
+
+<script>
+const gab = [
+ {resp:'O vidro vem da areia e o plástico, do petróleo — ambos artificiais',com:'O <b>vidro</b> é feito de areia e o <b>plástico</b>, de petróleo: ambos são <b>artificiais</b> (criados pelas pessoas). Por isso as opções que dizem "naturais" ou "retirados prontos da natureza" estão erradas.'},
+ {resp:'Petróleo, ferro e carvão mineral',com:'<b>Petróleo, ferro e carvão mineral</b> são naturais NÃO renováveis (demoram milhões de anos e podem acabar). Água/madeira/lã são renováveis; plástico/vidro/aço são artificiais.'},
+ {resp:'Não se esgotam ou podem se renovar',com:'São <b>renováveis</b> porque <b>não se esgotam ou podem se renovar</b> com o tempo. As outras opções descrevem materiais artificiais ou não renováveis.'},
+ {resp:'A balança',com:'A <b>massa</b> é medida na <b>balança</b> (em kg e g). Régua mede comprimento; termômetro, temperatura; copo medidor, volume.'},
+ {resp:'O volume',com:'"mL" (mililitro) é unidade de <b>volume</b> — o espaço que o líquido ocupa. Massa seria em g/kg.'},
+ {resp:'27 cm³',com:'Volume do cubo = lado × lado × lado = <b>3 × 3 × 3 = 27 cm³</b>.'},
+ {resp:'3 g/cm³',com:'Densidade = massa ÷ volume = <b>600 g ÷ 200 cm³ = 3 g/cm³</b>.'},
+ {resp:'Igual ou menor que a da água',com:'Quem <b>boia/flutua</b> tem densidade <b>igual ou menor</b> que a da água. Se fosse maior, afundaria.'},
+ {resp:'O chumbo é mais denso (mais massa no mesmo volume)',com:'No mesmo volume, o <b>chumbo</b> tem mais massa, logo é <b>mais denso</b> que o isopor. Densidade compara massa e volume.'},
+ {resp:'O diamante é mais duro que o vidro',com:'Se o diamante risca o vidro e não é riscado por ele, o <b>diamante é mais duro</b>. Ele é o material mais duro da natureza.'},
+ {resp:'Talco',com:'O <b>talco</b> é o mineral <b>menos duro</b>, riscado com facilidade. Diamante, aço e ferro são bem mais duros.'},
+ {resp:'Resistência mecânica',com:'Aguentar grande peso sem romper é <b>resistência mecânica</b> — por isso o aço é usado em pontes e prédios.'},
+ {resp:'Elasticidade',com:'Voltar sozinho à forma original após ser esticado é <b>elasticidade</b> (como a borracha).'},
+ {resp:'A água é o solvente e o pó é o soluto',com:'A água dissolve o pó, então a água é o <b>solvente</b> e o pó é o <b>soluto</b> (o que se dissolve).'},
+ {resp:'Dissolve muitos materiais diferentes (sal, açúcar)',com:'A água é "solvente universal" porque <b>dissolve muitos materiais</b> diferentes, como sal e açúcar.'},
+ {resp:'O óleo NÃO é solúvel em água',com:'O <b>óleo não é solúvel em água</b>: por isso eles se separam em camadas, em vez de se misturar.'},
+ {resp:'Eles se repelem (se afastam)',com:'<b>Polos iguais se repelem</b> (afastam). Só polos diferentes (norte com sul) é que se atraem.'},
+ {resp:'Um prego de ferro',com:'O <b>prego de ferro</b> (metal) é atraído pelo ímã. Vidro, borracha e madeira não são atraídos.'},
+ {resp:'Campo magnético',com:'Essa região em volta do ímã é o <b>campo magnético</b> — mais forte quanto mais perto do ímã.'},
+ {resp:'É um bom condutor de calor',com:'O alumínio é um <b>bom condutor de calor</b> (metal), por isso a panela esquenta rápido.'},
+ {resp:'Usam materiais isolantes térmicos',com:'As marmitas térmicas usam <b>materiais isolantes térmicos</b>, que dificultam a passagem do calor e conservam a temperatura.'},
+ {resp:'O cobre é um bom condutor de eletricidade',com:'O <b>cobre é um bom condutor de eletricidade</b>, por isso fica por dentro dos fios (revestido de plástico isolante por fora).'},
+ {resp:'É um isolante elétrico',com:'A borracha é <b>isolante elétrico</b>: não deixa a eletricidade passar, protegendo contra choques.'},
+ {resp:'Resíduos, que ainda podem ser reaproveitados',com:'Como ainda podem ser reaproveitados (adubo/reciclagem), são <b>resíduos</b>. Rejeito é o que NÃO pode mais ser reaproveitado.'},
+ {resp:'Extração → Fabricação → Transporte → Consumo → Descarte',com:'A ordem correta é <b>Extração → Fabricação → Transporte → Consumo → Descarte</b>, e há geração de resíduos em todas as etapas.'}
+];
+
+const tab=document.getElementById('tabela');
+gab.forEach((g,i)=>{
+  const c=document.createElement('div');
+  c.className='cel';
+  c.innerHTML=`<b>Q${i+1}</b><small>${g.resp}</small>`;
+  tab.appendChild(c);
+});
+
+const enun = [
+ 'Origem do vidro e do plástico.',
+ 'Recursos naturais não renováveis.',
+ 'Por que água, madeira e lã são renováveis.',
+ 'Instrumento para medir a massa.',
+ 'A unidade "mL" mede qual propriedade.',
+ 'Volume de um cubo de 3 cm de lado.',
+ 'Densidade de um bloco (600 g e 200 cm³).',
+ 'Por que a rolha boia na água.',
+ 'Comparação chumbo × isopor (mesmo volume).',
+ 'Diamante risca o vidro: o que conclui.',
+ 'Material menos duro.',
+ 'Propriedade do aço usado em pontes.',
+ 'Material que volta à forma original.',
+ 'Soluto e solvente no suco.',
+ 'Por que a água é solvente universal.',
+ 'Óleo e água que se separam.',
+ 'Polo norte aproximado de polo norte.',
+ 'Objeto atraído pelo ímã.',
+ 'Região em volta do ímã.',
+ 'Panela de alumínio que esquenta rápido.',
+ 'Por que a marmita térmica conserva o calor.',
+ 'Por que os fios são de cobre.',
+ 'Luvas de borracha do eletricista.',
+ 'Cascas e garrafas recicláveis: o que são.',
+ 'Sequência das etapas da história de um objeto.'
+];
+
+const com=document.getElementById('coment');
+gab.forEach((g,i)=>{
+  const d=document.createElement('div');
+  d.className='item';
+  d.innerHTML=`<div class="qn">Questão ${i+1}</div><div class="enun">${enun[i]}</div><div class="cor">✅ Resposta certa: ${g.resp}</div><div class="com">${g.com}</div>`;
+  com.appendChild(d);
+});
+</script>
+</body>
+</html>

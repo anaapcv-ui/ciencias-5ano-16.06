@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verdadeiro ou Falso – Ciências 5º ano</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Comic Sans MS','Trebuchet MS',sans-serif}
+  body{background:linear-gradient(135deg,#e8f5e9,#e3f2fd);color:#333;padding:14px;line-height:1.5;min-height:100vh}
+  .wrap{max-width:680px;margin:0 auto}
+  header{background:linear-gradient(135deg,#26a69a,#00897b);color:#fff;border-radius:22px;padding:20px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+  header h1{font-size:1.5rem}
+  .placar{display:flex;justify-content:space-around;background:#fff;border-radius:16px;padding:12px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.08);font-weight:bold}
+  .placar div span{display:block;font-size:1.4rem;color:#00897b}
+  .barra{height:14px;background:#eee;border-radius:10px;overflow:hidden;margin-bottom:14px}
+  .barra>div{height:100%;width:0;background:linear-gradient(90deg,#66bb6a,#26a69a);transition:width .4s}
+  .carta{background:#fff;border-radius:20px;padding:26px 22px;box-shadow:0 6px 18px rgba(0,0,0,.1);text-align:center;min-height:170px;display:flex;flex-direction:column;justify-content:center}
+  .carta .num{color:#aaa;font-size:.85rem;margin-bottom:8px}
+  .carta .frase{font-size:1.2rem;font-weight:bold;color:#333}
+  .botoes{display:flex;gap:14px;margin-top:18px}
+  .botoes button{flex:1;border:none;border-radius:16px;padding:16px;font-size:1.1rem;font-weight:bold;color:#fff;cursor:pointer;font-family:inherit;transition:transform .12s}
+  .botoes button:active{transform:scale(.96)}
+  .bv{background:#43a047}.bf{background:#e53935}
+  .fb{margin-top:16px;padding:14px;border-radius:14px;font-size:.95rem;display:none;animation:pop .3s}
+  .fb.ok{background:#e8f5e9;color:#2e7d32;border:2px solid #66bb6a;display:block}
+  .fb.no{background:#ffebee;color:#c62828;border:2px solid #ef9a9a;display:block}
+  @keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+  .prox{display:none;margin-top:14px;width:100%;background:#5c6bc0;color:#fff;border:none;border-radius:30px;padding:14px;font-size:1.05rem;cursor:pointer;font-family:inherit}
+  .prox.show{display:block}
+  .resultado{background:#fff;border-radius:20px;padding:30px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.12);display:none}
+  .resultado.show{display:block;animation:pop .4s}
+  .resultado .big{font-size:3rem}
+  .resultado h2{color:#00897b;margin:10px 0}
+  .resultado .stars{font-size:2rem;margin:10px 0;letter-spacing:4px}
+  .btn{background:#26a69a;color:#fff;border:none;border-radius:30px;padding:14px 26px;font-size:1.05rem;cursor:pointer;font-family:inherit;margin-top:12px}
+  .btn:hover{background:#00796b}
+  footer{text-align:center;color:#999;font-size:.8rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🎮 Verdadeiro ou Falso</h1>
+    <p>Ciências 5º ano • 12 cartas sorteadas por rodada</p>
+  </header>
+
+  <div id="jogo">
+    <div class="placar">
+      <div>Carta <span id="atual">1</span></div>
+      <div>Acertos <span id="acertos">0</span></div>
+      <div>Estrelas <span id="estrelas">0</span></div>
+    </div>
+    <div class="barra"><div id="barra"></div></div>
+    <div class="carta">
+      <div class="num" id="num"></div>
+      <div class="frase" id="frase"></div>
+      <div class="botoes">
+        <button class="bv" onclick="responder(true)">✔️ Verdadeiro</button>
+        <button class="bf" onclick="responder(false)">❌ Falso</button>
+      </div>
+      <div class="fb" id="fb"></div>
+      <button class="prox" id="prox" onclick="proxima()">Próxima carta ➡️</button>
+    </div>
+  </div>
+
+  <div class="resultado" id="resultado">
+    <div class="big" id="emoji">🏆</div>
+    <h2 id="rTitulo"></h2>
+    <div class="stars" id="rStars"></div>
+    <p id="rTexto"></p>
+    <button class="btn" onclick="iniciar()">🔄 Jogar de novo (embaralhado)</button>
+    <br><button class="btn" style="background:#5c6bc0" onclick="location.href='simulado_ciencias.html'">📝 Ir para o Simulado</button>
+  </div>
+
+  <footer>Dica: leia a frase com atenção. Às vezes só uma palavrinha muda tudo! 😉</footer>
+</div>
+
+<script>
+const banco = [
+  {f:'A densidade é calculada dividindo a massa pelo volume.',v:true,e:'Verdadeiro! Densidade = massa ÷ volume.'},
+  {f:'Um objeto que afunda na água tem densidade MENOR que a da água.',v:false,e:'Falso! Quem afunda tem densidade MAIOR que a da água.'},
+  {f:'O diamante é o material mais duro que existe na natureza.',v:true,e:'Verdadeiro! Ele risca qualquer outro material.'},
+  {f:'O talco é um material muito duro, que risca o diamante.',v:false,e:'Falso! O talco é o MENOS duro de todos.'},
+  {f:'Polos iguais de dois ímãs se atraem.',v:false,e:'Falso! Polos iguais se REPELEM. Os diferentes é que se atraem.'},
+  {f:'O ferro é um metal que pode ser atraído por um ímã.',v:true,e:'Verdadeiro! O ferro é atraído pelos ímãs.'},
+  {f:'O cobre é um bom condutor de eletricidade.',v:true,e:'Verdadeiro! Por isso é usado dentro dos fios.'},
+  {f:'A borracha é um bom condutor de eletricidade.',v:false,e:'Falso! A borracha é um isolante elétrico (não deixa a eletricidade passar).'},
+  {f:'O isopor e a lã são isolantes térmicos.',v:true,e:'Verdadeiro! Eles seguram o calor.'},
+  {f:'O alumínio das panelas é um bom condutor de calor.',v:true,e:'Verdadeiro! Por isso esquenta a comida; o cabo é isolante.'},
+  {f:'A água é chamada de solvente universal.',v:true,e:'Verdadeiro! Ela dissolve muitos materiais, como sal e açúcar.'},
+  {f:'O óleo se dissolve facilmente na água.',v:false,e:'Falso! O óleo NÃO se dissolve na água — eles se separam.'},
+  {f:'No copo de água com açúcar, o açúcar é o soluto.',v:true,e:'Verdadeiro! O açúcar é o soluto e a água é o solvente.'},
+  {f:'O plástico é um material natural, tirado direto da natureza.',v:false,e:'Falso! O plástico é artificial, feito de petróleo.'},
+  {f:'O petróleo e o ferro são recursos não renováveis.',v:true,e:'Verdadeiro! Demoram milhões de anos para se formar e podem acabar.'},
+  {f:'A massa é medida com uma balança.',v:true,e:'Verdadeiro! A massa é medida em kg e g, na balança.'},
+  {f:'O volume é o espaço que um corpo ocupa.',v:true,e:'Verdadeiro! Medido em litro, mL e cm³.'},
+  {f:'Elasticidade é a capacidade de voltar à forma original depois de esticar.',v:true,e:'Verdadeiro! Como acontece com o elástico de borracha.'},
+  {f:'Resíduo e rejeito são exatamente a mesma coisa.',v:false,e:'Falso! Resíduo pode ser reaproveitado; rejeito (lixo) não pode mais.'},
+  {f:'A primeira etapa da história de um objeto é o descarte.',v:false,e:'Falso! A primeira etapa é a extração da matéria-prima.'},
+  {f:'São geradas sobras (resíduos) em todas as etapas de produção de um objeto.',v:true,e:'Verdadeiro! Da extração ao descarte, todas geram resíduos.'},
+  {f:'O vidro é feito a partir da areia.',v:true,e:'Verdadeiro! O vidro vem da areia.'},
+  {f:'O volume de um cubo de 5 cm de lado é 125 cm³.',v:true,e:'Verdadeiro! 5 × 5 × 5 = 125 cm³.'},
+  {f:'Resistência mecânica é a capacidade de um material dissolver outro.',v:false,e:'Falso! Isso é solubilidade. Resistência mecânica é aguentar força sem quebrar.'}
+];
+
+let rodada=[], i=0, acertos=0, estrelas=0, respondido=false;
+
+function embaralha(a){for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]];}return a;}
+
+function iniciar(){
+  rodada = embaralha([...banco]).slice(0,12);
+  i=0;acertos=0;estrelas=0;respondido=false;
+  document.getElementById('resultado').classList.remove('show');
+  document.getElementById('jogo').style.display='block';
+  mostra();
+  atualizaPlacar();
+}
+
+function mostra(){
+  respondido=false;
+  const c=rodada[i];
+  document.getElementById('num').textContent='Carta '+(i+1)+' de 12';
+  document.getElementById('frase').textContent=c.f;
+  document.getElementById('fb').className='fb';
+  document.getElementById('fb').textContent='';
+  document.getElementById('prox').classList.remove('show');
+  document.querySelectorAll('.botoes button').forEach(b=>b.disabled=false);
+  document.getElementById('atual').textContent=i+1;
+  document.getElementById('barra').style.width=(i/12*100)+'%';
+}
+
+function responder(resp){
+  if(respondido)return;
+  respondido=true;
+  const c=rodada[i];
+  const fb=document.getElementById('fb');
+  document.querySelectorAll('.botoes button').forEach(b=>b.disabled=true);
+  if(resp===c.v){acertos++;estrelas++;fb.className='fb ok';fb.textContent='✅ '+c.e;}
+  else{fb.className='fb no';fb.textContent='💡 '+c.e;}
+  atualizaPlacar();
+  document.getElementById('prox').classList.add('show');
+  document.getElementById('prox').textContent = (i===11)?'Ver meu resultado 🏁':'Próxima carta ➡️';
+}
+
+function proxima(){
+  i++;
+  if(i>=12){fim();return;}
+  mostra();
+}
+
+function atualizaPlacar(){
+  document.getElementById('acertos').textContent=acertos;
+  document.getElementById('estrelas').textContent=estrelas;
+}
+
+function fim(){
+  document.getElementById('jogo').style.display='none';
+  const res=document.getElementById('resultado');
+  res.classList.add('show');
+  document.getElementById('barra').style.width='100%';
+  const pct=Math.round(acertos/12*100);
+  let nStars = acertos>=11?5:acertos>=9?4:acertos>=7?3:acertos>=5?2:1;
+  document.getElementById('rStars').textContent='⭐'.repeat(nStars)+'☆'.repeat(5-nStars);
+  document.getElementById('rTitulo').textContent=`Você acertou ${acertos} de 12 (${pct}%)`;
+  let emoji,txt;
+  if(pct>=90){emoji='🏆';txt='Fenômeno! Você está super preparado(a) para a prova!';}
+  else if(pct>=70){emoji='🎉';txt='Muito bem! Quase tudo certo. Revise as cartas que erraram e arrasa!';}
+  else if(pct>=50){emoji='💪';txt='Bom começo! Jogue de novo e leia as explicações com calma.';}
+  else{emoji='📚';txt='Vamos treinar mais! Abra o Resumo, releia e volte para jogar. Você consegue!';}
+  document.getElementById('emoji').textContent=emoji;
+  document.getElementById('rTexto').textContent=txt;
+}
+
+iniciar();
+</script>
+</body>
+</html>
